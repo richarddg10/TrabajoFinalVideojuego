@@ -9,26 +9,26 @@ let pantalla6
 let pantalla7
 let cambio
 let personaje
-let 
+let enemigo1Aire
+let enemigo2Aire
 
-function preload() {
-
-  
-}
 
 function setup() {
   createCanvas(1000, 600)
 
   pantalla1 = new Pantalla(0, 0, 1000, 600, "01")
   pantalla2 = new Pantalla(0, 0, 1000, 600, "02")
-  pantalla3 = new Pantalla (0, 0, 1000, 600, "03")
-  pantalla4Fuego= new Pantalla(0, 0, 1000, 600, "04FUEGO")
-  pantalla5= new Pantalla(0, 0, 1000, 600, "05")
-  pantalla6= new Pantalla(0, 0, 1000, 600, "06")
-  pantalla7= new Pantalla(0, 0, 1000, 600, "07")
-  personaje = new Personaje(25, 25, 50, 50, 0, 4, 3)
+  pantalla3 = new Pantalla(0, 0, 1000, 600, "03")
+  pantalla4Fuego = new Pantalla(0, 0, 1000, 600, "04FUEGO")
+  pantalla5 = new Pantalla(0, 0, 1000, 600, "05")
+  pantalla6 = new Pantalla(0, 0, 1000, 600, "06")
+  pantalla7 = new Pantalla(0, 0, 1000, 600, "07")
+  personaje = new Personaje(0, 0, 100, 100, 0, 4, 3)
+  enemigo1Aire = new Enemigo(0, 0, 100, 100, 0, 0, "aire", 1, 1)
+  enemigo2Aire = new Enemigo(0, 0, 100, 100, 9, 5, "aire", -1, 1)
+
   setMaps()
-  cambio = 5
+  cambio = 7
 }
 
 function draw() {
@@ -46,30 +46,48 @@ function draw() {
       break
     case 4:
       pantalla4Fuego.show()
-      personaje.show()
+      personaje.showFuego()
+      personaje.showVidas()
+      gameover()
 
-      if(pantalla4Fuego.mapa[personaje.matY][personaje.matX] < 1) {
+      if (pantalla4Fuego.mapa[personaje.matY][personaje.matX] < 1) {
         personaje.vida--
         console.log(personaje.vida)
         personaje.matX = 0
         personaje.matY = 4
       }
+
+      if (pantalla4Fuego.mapa[personaje.matY][personaje.matX] > 1) {
+        cambio = 5
+      }
       break
 
-      case 5:
+    case 5:
       pantalla5.show()
-    
+
       break
 
-      case 6:
+    case 6:
       pantalla6.show()
-    
+
       break
 
-      case 7:
+    case 7:
       pantalla7.show()
-    
+      enemigo1Aire.showAire()
+      enemigo2Aire.showAire()
+      enemigo1Aire.moverAire()
+      enemigo2Aire.moverAire()
       break
+  }
+}
+
+function gameover() {
+  if (personaje.vida <= 0) {
+    personaje.vida = 3
+    personaje.matX = 0
+    personaje.matY = 4
+    cambio = 1
   }
 }
 
@@ -96,7 +114,7 @@ function mousePressed() {
       }
       break
 
-      case 3:
+    case 3:
       for (let fil = 0; fil < 6; fil++) {
         for (let col = 0; col < 10; col++) {
           if (pantalla3.clickTile(mouseX, mouseY, fil, col) && pantalla3.mapa[fil][col] == 1) {
@@ -106,12 +124,12 @@ function mousePressed() {
       }
       break
 
-      case 4:
-      
-        
+    case 4:
+
+
       break
 
-      case 5:
+    case 5:
       for (let fil = 0; fil < 6; fil++) {
         for (let col = 0; col < 10; col++) {
           if (pantalla5.clickTile(mouseX, mouseY, fil, col) && pantalla5.mapa[fil][col] == 1) {
@@ -121,7 +139,7 @@ function mousePressed() {
       }
       break
 
-      case 6:
+    case 6:
       for (let fil = 0; fil < 6; fil++) {
         for (let col = 0; col < 10; col++) {
           if (pantalla6.clickTile(mouseX, mouseY, fil, col) && pantalla6.mapa[fil][col] == 1) {
@@ -131,7 +149,7 @@ function mousePressed() {
       }
       break
 
-      case 7:
+    case 7:
       for (let fil = 0; fil < 6; fil++) {
         for (let col = 0; col < 10; col++) {
           if (pantalla7.clickTile(mouseX, mouseY, fil, col) && pantalla7.mapa[fil][col] == 1) {
@@ -198,6 +216,7 @@ function setMaps() {
   pantalla4Fuego.setMapTile(4, 8, 1)
   pantalla4Fuego.setMapTile(1, 9, 1)
   pantalla4Fuego.setMapTile(2, 9, 1)
+  pantalla4Fuego.setMapTile(0, 9, 2)
   pantalla5.setMapTile(0, 8, 1)
   pantalla5.setMapTile(0, 9, 1)
   pantalla5.setMapTile(1, 8, 1)
@@ -206,9 +225,9 @@ function setMaps() {
   pantalla6.setMapTile(0, 9, 1)
   pantalla6.setMapTile(1, 8, 1)
   pantalla6.setMapTile(1, 9, 1)
-  
-  
 
-  
-  
+
+
+
+
 }

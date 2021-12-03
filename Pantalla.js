@@ -24,8 +24,10 @@ class Pantalla {
         image(this.pantalla1, this.x, this.y, this.ancho, this.altura)
         for (let fil = 0; fil < 6; fil++) {
             for (let col = 0; col < 10; col++) {
-                if (this.mapa[fil][col] != 0) {
+                if (this.mapa[fil][col] == 1) {
                     fill(255)
+                } else if(this.mapa[fil][col] == 2){
+                    fill(0, 0, 255)
                 } else {
                     noFill()
                 }

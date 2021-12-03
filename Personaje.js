@@ -1,5 +1,5 @@
 class Personaje{
-    constructor(x, y, ancho, altura, matX, matY, vida, imagen) {
+    constructor(x, y, ancho, altura, matX, matY, vida) {
         this.x = x
         this.y = y
         this.ancho = ancho
@@ -7,11 +7,18 @@ class Personaje{
         this.matX = matX
         this.matY = matY
         this.vida = vida
-        this.imagen = imagen
+        this.imagenFuego = loadImage("PersonajeFuego.png")
     }
-    show(){
+    showFuego(){
         
-        image(this.imagen, this.x + (this.matX * 100), this.y + (this.matY * 100), this.ancho, this.altura)
+        image(this.imagenFuego, this.x + (this.matX * 100), this.y + (this.matY * 100), this.ancho, this.altura)
+    }
+
+    showVidas(){
+        for(let i = 0; i < this.vida; i ++){
+            fill(255, 0, 0)
+            rect(10 + 60*i, 10, 50, 50)
+        }
     }
 
     move(mapa) {
