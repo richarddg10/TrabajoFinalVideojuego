@@ -1,5 +1,5 @@
 class Personaje{
-    constructor(x, y, ancho, altura, matX, matY, vida) {
+    constructor(x, y, ancho, altura, matX, matY, vida, imagen) {
         this.x = x
         this.y = y
         this.ancho = ancho
@@ -7,10 +7,11 @@ class Personaje{
         this.matX = matX
         this.matY = matY
         this.vida = vida
+        this.imagen = imagen
     }
     show(){
-        fill (0, 0, 255)
-        rect(this.x + (this.matX * 100), this.y + (this.matY * 100), this.ancho, this.altura)
+        
+        image(this.imagen, this.x + (this.matX * 100), this.y + (this.matY * 100), this.ancho, this.altura)
     }
 
     move(mapa) {
