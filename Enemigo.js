@@ -28,7 +28,7 @@ class Enemigo {
 
     dispararAire(dirX) {
         if (frameCount % 60 == 0) {
-            this.balas.push(new Balas((this.x + 25) + (this.matX * 100), (this.y + 25) + (this.matY * 100), 50, 50, dirX))
+            this.balas.push(new Balas((this.x + 25) + (this.matX * 100), (this.y + 30) + (this.matY * 100), 40, 40, dirX))
         }
     }
 
@@ -56,6 +56,16 @@ class Enemigo {
                 this.matY -= 1
             } else {
                 this.matY += 1
+            }
+        }
+    }
+
+    impactoBalas(personaje) {
+        for (let index = 0; index < this.balas.length; index++) {
+            const bala = this.balas[index];
+            if(bala.impacto(personaje)) {
+                personaje.vida--
+                this.balas.splice(index, 1)
             }
         }
     }

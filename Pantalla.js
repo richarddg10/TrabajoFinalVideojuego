@@ -24,13 +24,19 @@ class Pantalla {
         image(this.pantalla1, this.x, this.y, this.ancho, this.altura)
         for (let fil = 0; fil < 6; fil++) {
             for (let col = 0; col < 10; col++) {
+                strokeWeight(2)
                 if (this.mapa[fil][col] == 1) {
-                    fill(255)
-                } else if(this.mapa[fil][col] == 2){
-                    fill(0, 0, 255)
+                    //fill(255)
+                    stroke(255)
+                } else if (this.mapa[fil][col] == 2) {
+                    stroke(0, 255, 0)
+                } else if(this.mapa[fil][col] > 2) {
+                    stroke(0, 0, 255)
                 } else {
+                    noStroke()
                     noFill()
                 }
+                noFill()
                 rect(col * 100, fil * 100, 100, 100)
             }
         }

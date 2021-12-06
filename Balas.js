@@ -5,13 +5,28 @@ class Balas {
         this.ancho = ancho
         this.altura = altura
         this.dirX = dirX
+        this.imagenBalasAire = loadImage("balaAire.png")
     }
 
     show() {
-        rect(this.x, this.y, this.ancho, this.altura)
+        image(this.imagenBalasAire, this.x, this.y, this.ancho, this.altura)
     }
 
     move() {
         this.x += 5 * this.dirX
+    }
+
+    impacto(personaje) {
+        let personajeX = personaje.x + (personaje.matX * 100)
+        let personajeY = personaje.y + (personaje.matY * 100)
+        //console.log(personajeX + personaje.ancho)
+        //console.log(personajeY + personaje.altura)
+
+        if (personajeX + personaje.ancho > this.x &&
+            personajeX < this.x + this.ancho &&
+            personajeY + personaje.altura > this.y &&
+            personajeY < this.y + this.altura) {
+            return true
+        } else return false
     }
 }

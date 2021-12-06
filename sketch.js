@@ -7,6 +7,8 @@ let pantalla4Fuego
 let pantalla5
 let pantalla6
 let pantalla7
+let pantalla8
+let pantalla9
 let cambio
 let personaje
 let enemigo1Aire
@@ -23,6 +25,8 @@ function setup() {
   pantalla5 = new Pantalla(0, 0, 1000, 600, "05")
   pantalla6 = new Pantalla(0, 0, 1000, 600, "06")
   pantalla7 = new Pantalla(0, 0, 1000, 600, "07")
+  pantalla8 = new Pantalla(0, 0, 1000, 600, "08")
+  pantalla9 = new Pantalla(0, 0, 1000, 600, "09")
   personaje = new Personaje(0, 0, 100, 100, 0, 4, 3)
   enemigo1Aire = new Enemigo(0, 0, 100, 100, 0, 0, "aire", 1, 1)
   enemigo2Aire = new Enemigo(0, 0, 100, 100, 9, 5, "aire", -1, 1)
@@ -61,23 +65,30 @@ function draw() {
         cambio = 5
       }
       break
-
     case 5:
       pantalla5.show()
-
       break
-
     case 6:
       pantalla6.show()
-
       break
-
     case 7:
       pantalla7.show()
+      personaje.showAire()
+      personaje.showVidas()
       enemigo1Aire.showAire()
       enemigo2Aire.showAire()
+
       enemigo1Aire.moverAire()
       enemigo2Aire.moverAire()
+
+      enemigo1Aire.impactoBalas(personaje)
+      enemigo2Aire.impactoBalas(personaje)
+      break
+    case 8:
+      pantalla8.show()
+      break
+    case 9:
+      pantalla9.show()
       break
   }
 }
@@ -149,11 +160,21 @@ function mousePressed() {
       }
       break
 
-    case 7:
+    case 8:
       for (let fil = 0; fil < 6; fil++) {
         for (let col = 0; col < 10; col++) {
-          if (pantalla7.clickTile(mouseX, mouseY, fil, col) && pantalla7.mapa[fil][col] == 1) {
-            cambio = 8
+          if (pantalla3.clickTile(mouseX, mouseY, fil, col) && pantalla3.mapa[fil][col] == 1) {
+            cambio = 9
+          }
+        }
+      }
+      break
+
+    case 9:
+      for (let fil = 0; fil < 6; fil++) {
+        for (let col = 0; col < 10; col++) {
+          if (pantalla3.clickTile(mouseX, mouseY, fil, col) && pantalla3.mapa[fil][col] == 1) {
+            cambio = 10
           }
         }
       }
@@ -166,6 +187,10 @@ function keyPressed() {
     case 4:
       personaje.move(pantalla4Fuego.mapa)
       break
+
+    case 7:
+      personaje.move(pantalla7.mapa)
+      break
   }
 }
 
@@ -177,6 +202,8 @@ function setMaps() {
   pantalla5.loadMap()
   pantalla6.loadMap()
   pantalla7.loadMap()
+  pantalla8.loadMap()
+  pantalla9.loadMap()
   pantalla1.setMapTile(4, 4, 1)
   pantalla1.setMapTile(4, 5, 1)
   pantalla2.setMapTile(0, 8, 1)
@@ -225,8 +252,25 @@ function setMaps() {
   pantalla6.setMapTile(0, 9, 1)
   pantalla6.setMapTile(1, 8, 1)
   pantalla6.setMapTile(1, 9, 1)
+  for (let fil = 0; fil < 6; fil++) {
+    for (let col = 0; col < 10; col++) {
+      pantalla7.mapa[fil][col] = 1
+    }
+  }
+  pantalla7.setMapTile(4, 2, 3)
+  pantalla7.setMapTile(2, 3, 4)
+  pantalla7.setMapTile(1, 3, 5)
+  pantalla7.setMapTile(3, 2, 6)
 
-
+  // Pantalla 8
+  pantalla8.setMapTile(0, 8, 1)
+  pantalla8.setMapTile(0, 9, 1)
+  pantalla8.setMapTile(1, 8, 1)
+  pantalla8.setMapTile(1, 9, 1)
+  pantalla9.setMapTile(0, 8, 1)
+  pantalla9.setMapTile(0, 9, 1)
+  pantalla9.setMapTile(1, 8, 1)
+  pantalla9.setMapTile(1, 9, 1)
 
 
 
