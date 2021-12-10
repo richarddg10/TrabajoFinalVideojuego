@@ -10,5 +10,4 @@ class Inventario {
     show() {
         image(this.planta, this.x, this.y, this.ancho, this.altura)
     }
-
 }

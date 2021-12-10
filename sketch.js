@@ -77,12 +77,15 @@ function draw() {
     case 1:
       pantalla1.show()
       break
+
     case 2:
       pantalla2.show()
       break
+
     case 3:
       pantalla3.show()
       break
+      
     case 4:
       pantalla4Fuego.show()
       personaje.showFuego()
@@ -100,12 +103,15 @@ function draw() {
         cambio = 5
       }
       break
+
     case 5:
       pantalla5.show()
       break
+
     case 6:
       pantalla6.show()
       break
+
     case 7:
       pantalla7.show()
       personaje.showAire()
@@ -134,11 +140,12 @@ function draw() {
       }
 
       gameover()
-
       break
+
     case 8:
       pantalla8.show()
       break
+
     case 9:
       pantalla9.show()
       break
@@ -154,7 +161,6 @@ function draw() {
         personaje.matX = 0
         personaje.matY = 3
         console.log(personaje.vida)
-
       }
 
       if (pantalla10.mapa[personaje.matY][personaje.matX] > 1) {
@@ -189,7 +195,6 @@ function draw() {
       }
 
       gameover()
-
       break
 
     case 11:
@@ -237,8 +242,6 @@ function draw() {
 
     case 14:
       pantalla14.show()
-
-
       break
 
     case 15:
@@ -321,8 +324,6 @@ function mousePressed() {
       break
 
     case 4:
-
-
       break
 
     case 5:
@@ -456,7 +457,6 @@ function keyPressed() {
       }
 
       personaje.disparar()
-
       break
 
     case 10:

@@ -72,13 +72,6 @@ class Personaje {
         }
     }
 
-    /* if (personajeX + personaje.ancho > this.x &&
-         personajeX < this.x + this.ancho &&
-         personajeY + personaje.altura > this.y &&
-         personajeY < this.y + this.altura) {
-         return true
-     } else return false*/
-
     move(mapa) {
         //console.log(this.matX)
         if (keyCode == RIGHT_ARROW && mapa[this.matY][this.matX + 1] != 3 &&  mapa[this.matY][this.matX + 1] >= 0) {
