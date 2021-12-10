@@ -67,7 +67,7 @@ function setup() {
       plantasAgregadas++
     }
   }
-  cambio = 13
+  cambio = 1
 }
 
 function draw() {
