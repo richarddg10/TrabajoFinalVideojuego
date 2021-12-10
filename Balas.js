@@ -12,6 +12,12 @@ class Balas {
         image(this.imagenBalasAire, this.x, this.y, this.ancho, this.altura)
     }
 
+    showBolitas() {
+        noStroke()
+        fill(0, 0, 255)
+        circle(this.x + this.ancho / 2, this.y + this.altura / 2, this.ancho)
+    }
+
     move() {
         this.x += 5 * this.dirX
     }
