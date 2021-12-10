@@ -11,6 +11,9 @@ class Enemigo {
         this.dirX = dirX
         this.dirY = dirY
         this.balas = []
+        this.piedra1 = loadImage("Piedra1.png")
+        this.piedra2 = loadImage("Piedra2.png")
+        this.piedra3 = loadImage("Piedra3.png")
     }
     showAire() {
         image(this.imagenAire, this.x + (this.matX * 100), this.y + (this.matY * 100), this.ancho, this.altura)
@@ -18,6 +21,9 @@ class Enemigo {
         this.showBalas()
         this.eliminarBalas()
     }
+
+    
+
 
     showBalas() {
         for (let i = 0; i < this.balas.length; i++) {
@@ -60,6 +66,7 @@ class Enemigo {
         }
     }
 
+
     impactoBalas(personaje) {
         for (let index = 0; index < this.balas.length; index++) {
             const bala = this.balas[index];
@@ -69,4 +76,5 @@ class Enemigo {
             }
         }
     }
+   
 }

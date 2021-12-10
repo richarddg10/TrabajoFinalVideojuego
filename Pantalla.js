@@ -30,8 +30,9 @@ class Pantalla {
                     stroke(255)
                 } else if (this.mapa[fil][col] == 2) {
                     stroke(0, 255, 0)
-                } else if(this.mapa[fil][col] > 2) {
+                } else if(this.mapa[fil][col]  > 2) {
                     stroke(0, 0, 255)
+                
                 } else {
                     noStroke()
                     noFill()

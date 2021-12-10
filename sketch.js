@@ -9,10 +9,17 @@ let pantalla6
 let pantalla7
 let pantalla8
 let pantalla9
+let pantalla10
+let pantalla11
+let pantalla12
+let pantalla13
+let pantalla14
+let pantalla15
 let cambio
 let personaje
 let enemigo1Aire
 let enemigo2Aire
+
 
 
 function setup() {
@@ -27,12 +34,20 @@ function setup() {
   pantalla7 = new Pantalla(0, 0, 1000, 600, "07")
   pantalla8 = new Pantalla(0, 0, 1000, 600, "08")
   pantalla9 = new Pantalla(0, 0, 1000, 600, "09")
-  personaje = new Personaje(0, 0, 100, 100, 0, 4, 3)
+  pantalla10 = new Pantalla(0, 0, 1000, 600, "10")
+  pantalla11 = new Pantalla(0, 0, 1000, 600, "11")
+  pantalla12 = new Pantalla(0, 0, 1000, 600, "12")
+  pantalla13 = new Pantalla(0, 0, 1000, 600, "13")
+  pantalla14 = new Pantalla(0, 0, 1000, 600, "14")
+  pantalla15 = new Pantalla(0, 0, 1000, 600, "15")
+  personaje = new Personaje(15, 0, 70, 100, 0, 4, 3)
   enemigo1Aire = new Enemigo(0, 0, 100, 100, 0, 0, "aire", 1, 1)
   enemigo2Aire = new Enemigo(0, 0, 100, 100, 9, 5, "aire", -1, 1)
+  
 
   setMaps()
-  cambio = 7
+  cambio = 10
+
 }
 
 function draw() {
@@ -83,12 +98,71 @@ function draw() {
 
       enemigo1Aire.impactoBalas(personaje)
       enemigo2Aire.impactoBalas(personaje)
+      gameover()
+
+      if (pantalla7.mapa[personaje.matY][personaje.matX] > 1) {
+        cambio = 8
+      }
+     
       break
     case 8:
       pantalla8.show()
       break
     case 9:
       pantalla9.show()
+      break
+
+      case 10:
+      pantalla10.show()
+      personaje.showAgua()
+      personaje.showVidas()
+      gameover()
+
+      if (pantalla10.mapa[personaje.matY][personaje.matX] < 1) {
+        personaje.vida--
+        console.log(personaje.vida)
+     
+      }
+
+      if (pantalla10.mapa[personaje.matY][personaje.matX] > 1) {
+        cambio = 11
+      }
+    
+      break
+
+      case 11:
+      pantalla11.show()
+      break
+
+      case 12:
+      pantalla12.show()
+      break
+
+      case 13:
+      pantalla13.show()
+      personaje.showTierra()
+      personaje.showVidas()
+      gameover()
+
+      if (pantalla13.mapa[personaje.matY][personaje.matX] < 1) {
+        personaje.vida--
+        console.log(personaje.vida)
+     
+      }
+
+      if (pantalla13.mapa[personaje.matY][personaje.matX] > 1) {
+        cambio = 14
+      }
+      break
+
+      case 14:
+      pantalla14.show()
+      
+
+      break
+
+      case 15:
+      pantalla15.show()
       break
   }
 }
@@ -154,16 +228,22 @@ function mousePressed() {
       for (let fil = 0; fil < 6; fil++) {
         for (let col = 0; col < 10; col++) {
           if (pantalla6.clickTile(mouseX, mouseY, fil, col) && pantalla6.mapa[fil][col] == 1) {
-            cambio = 7
+            personaje.matX = 1
+            personaje.matY = 4
+             cambio = 7
+
+  
           }
         }
       }
       break
 
+
+
     case 8:
       for (let fil = 0; fil < 6; fil++) {
         for (let col = 0; col < 10; col++) {
-          if (pantalla3.clickTile(mouseX, mouseY, fil, col) && pantalla3.mapa[fil][col] == 1) {
+          if (pantalla8.clickTile(mouseX, mouseY, fil, col) && pantalla8.mapa[fil][col] == 1) {
             cambio = 9
           }
         }
@@ -173,12 +253,71 @@ function mousePressed() {
     case 9:
       for (let fil = 0; fil < 6; fil++) {
         for (let col = 0; col < 10; col++) {
-          if (pantalla3.clickTile(mouseX, mouseY, fil, col) && pantalla3.mapa[fil][col] == 1) {
+          if (pantalla9.clickTile(mouseX, mouseY, fil, col) && pantalla9.mapa[fil][col] == 1) {
+            personaje.matX = 0
+            personaje.matY = 3
             cambio = 10
           }
         }
       }
       break
+
+      
+
+
+        case 11:
+          for (let fil = 0; fil < 6; fil++) {
+            for (let col = 0; col < 10; col++) {
+              if (pantalla11.clickTile(mouseX, mouseY, fil, col) && pantalla11.mapa[fil][col] == 1) {
+                cambio = 12
+              }
+            }
+          }
+          break
+
+          
+
+          case 12:
+            for (let fil = 0; fil < 6; fil++) {
+              for (let col = 0; col < 10; col++) {
+                if (pantalla12.clickTile(mouseX, mouseY, fil, col) && pantalla12.mapa[fil][col] == 1) {
+                  personaje.matX = 9
+                  personaje.matY = 5
+                  cambio = 13
+                }
+              }
+            }
+            break
+
+            case 13:
+              for (let fil = 0; fil < 6; fil++) {
+                for (let col = 0; col < 10; col++) {
+                  if (pantalla13.clickTile(mouseX, mouseY, fil, col) && pantalla13.mapa[fil][col] == 1) {
+                    cambio = 14
+                  }
+                }
+              }
+              break
+
+              case 14:
+                for (let fil = 0; fil < 6; fil++) {
+                  for (let col = 0; col < 10; col++) {
+                    if (pantalla14.clickTile(mouseX, mouseY, fil, col) && pantalla14.mapa[fil][col] == 1) {
+                      cambio = 15
+                    }
+                  }
+                }
+                break
+
+                case 15:
+                  for (let fil = 0; fil < 6; fil++) {
+                    for (let col = 0; col < 10; col++) {
+                      if (pantalla15.clickTile(mouseX, mouseY, fil, col) && pantalla15.mapa[fil][col] == 1) {
+                        cambio = 1
+                      }
+                    }
+                  }
+                  break
   }
 }
 
@@ -190,6 +329,14 @@ function keyPressed() {
 
     case 7:
       personaje.move(pantalla7.mapa)
+      break
+
+    case 10:
+      personaje.move(pantalla10.mapa)
+      break
+      
+      case 13:
+      personaje.move(pantalla13.mapa)
       break
   }
 }
@@ -204,16 +351,26 @@ function setMaps() {
   pantalla7.loadMap()
   pantalla8.loadMap()
   pantalla9.loadMap()
+  pantalla10.loadMap()
+  pantalla11.loadMap()
+  pantalla12.loadMap()
+  pantalla13.loadMap()
+  pantalla14.loadMap()
+  pantalla15.loadMap()
+
   pantalla1.setMapTile(4, 4, 1)
   pantalla1.setMapTile(4, 5, 1)
+
   pantalla2.setMapTile(0, 8, 1)
   pantalla2.setMapTile(0, 9, 1)
   pantalla2.setMapTile(1, 8, 1)
   pantalla2.setMapTile(1, 9, 1)
+
   pantalla3.setMapTile(0, 8, 1)
   pantalla3.setMapTile(0, 9, 1)
   pantalla3.setMapTile(1, 8, 1)
   pantalla3.setMapTile(1, 9, 1)
+
   pantalla4Fuego.setMapTile(4, 0, 1)
   pantalla4Fuego.setMapTile(4, 1, 1)
   pantalla4Fuego.setMapTile(4, 2, 1)
@@ -244,6 +401,7 @@ function setMaps() {
   pantalla4Fuego.setMapTile(1, 9, 1)
   pantalla4Fuego.setMapTile(2, 9, 1)
   pantalla4Fuego.setMapTile(0, 9, 2)
+
   pantalla5.setMapTile(0, 8, 1)
   pantalla5.setMapTile(0, 9, 1)
   pantalla5.setMapTile(1, 8, 1)
@@ -257,10 +415,20 @@ function setMaps() {
       pantalla7.mapa[fil][col] = 1
     }
   }
-  pantalla7.setMapTile(4, 2, 3)
-  pantalla7.setMapTile(2, 3, 4)
-  pantalla7.setMapTile(1, 3, 5)
-  pantalla7.setMapTile(3, 2, 6)
+  pantalla7.setMapTile(1, 1, 3)
+  pantalla7.setMapTile(1, 2, 3)
+  pantalla7.setMapTile(2, 2, 3)
+  pantalla7.setMapTile(3, 3, 3)
+  pantalla7.setMapTile(3, 4, 3)
+  pantalla7.setMapTile(4, 4, 3)
+  pantalla7.setMapTile(0, 5, 3)
+  pantalla7.setMapTile(1, 5, 3)
+  pantalla7.setMapTile(1, 6, 3)
+  pantalla7.setMapTile(3, 7, 3)
+  pantalla7.setMapTile(4, 7, 3)
+  pantalla7.setMapTile(3, 8, 3)
+  pantalla7.setMapTile(0, 6, 2)
+  
 
   // Pantalla 8
   pantalla8.setMapTile(0, 8, 1)
@@ -272,6 +440,150 @@ function setMaps() {
   pantalla9.setMapTile(1, 8, 1)
   pantalla9.setMapTile(1, 9, 1)
 
+  pantalla10.setMapTile(5, 9, 2)
+  pantalla10.setMapTile(5, 8, 2)
 
 
+  pantalla10.setMapTile(0, 0, 1)
+  pantalla10.setMapTile(0, 1, 1)
+  pantalla10.setMapTile(0, 2, 1)
+  pantalla10.setMapTile(0, 3, 1)
+  pantalla10.setMapTile(0, 4, 1)
+  pantalla10.setMapTile(0, 5, 1)
+  pantalla10.setMapTile(0, 6, 1)
+  pantalla10.setMapTile(0, 7, 1)
+ 
+
+  pantalla10.setMapTile(1, 0, 1)
+  pantalla10.setMapTile(1, 1, 1)
+  pantalla10.setMapTile(1, 2, 1)
+  pantalla10.setMapTile(1, 3, 1)
+  pantalla10.setMapTile(1, 4, 1)
+  pantalla10.setMapTile(1, 5, 1)
+  pantalla10.setMapTile(1, 6, 1)
+  pantalla10.setMapTile(1, 7, 1)
+
+
+  pantalla10.setMapTile(2, 0, 1)
+  pantalla10.setMapTile(2, 1, 1)
+  pantalla10.setMapTile(2, 2, 1)
+  pantalla10.setMapTile(2, 3, 1)
+  pantalla10.setMapTile(2, 4, 1)
+  pantalla10.setMapTile(2, 5, 1)
+  pantalla10.setMapTile(2, 6, 1)
+  pantalla10.setMapTile(2, 7, 1)
+  
+
+  pantalla10.setMapTile(3, 0, 1)
+  pantalla10.setMapTile(3, 1, 1)
+  pantalla10.setMapTile(3, 2, 1)
+  pantalla10.setMapTile(3, 3, 1)
+  pantalla10.setMapTile(3, 4, 1)
+  pantalla10.setMapTile(3, 5, 1)
+  pantalla10.setMapTile(3, 6, 1)
+  pantalla10.setMapTile(3, 7, 1)
+  
+
+  pantalla10.setMapTile(4, 0, 1)
+  pantalla10.setMapTile(4, 1, 1)
+  pantalla10.setMapTile(4, 2, 1)
+  pantalla10.setMapTile(4, 3, 1)
+  pantalla10.setMapTile(4, 4, 1)
+  pantalla10.setMapTile(4, 5, 1)
+  pantalla10.setMapTile(4, 6, 1)
+  pantalla10.setMapTile(4, 7, 1)
+  
+
+  pantalla10.setMapTile(5, 0, 1)
+  pantalla10.setMapTile(5, 1, 1)
+  pantalla10.setMapTile(5, 2, 1)
+  pantalla10.setMapTile(5, 3, 1)
+  pantalla10.setMapTile(5, 4, 1)
+  pantalla10.setMapTile(5, 5, 1)
+  pantalla10.setMapTile(5, 6, 1)
+  pantalla10.setMapTile(5, 7, 1)
+  
+
+  pantalla11.setMapTile(0, 8, 1)
+  pantalla11.setMapTile(0, 9, 1)
+  pantalla11.setMapTile(1, 8, 1)
+  pantalla11.setMapTile(1, 9, 1)
+
+  pantalla12.setMapTile(0, 8, 1)
+  pantalla12.setMapTile(0, 9, 1)
+  pantalla12.setMapTile(1, 8, 1)
+  pantalla12.setMapTile(1, 9, 1)
+
+  pantalla13.setMapTile(0, 2, 2)
+  pantalla13.setMapTile(0, 0, 1)
+  pantalla13.setMapTile(0, 1, 1)
+  pantalla13.setMapTile(0, 3, 1)
+  pantalla13.setMapTile(0, 4, 1)
+  pantalla13.setMapTile(0, 6, 1)
+  pantalla13.setMapTile(0, 7, 1)
+  pantalla13.setMapTile(0, 9, 1)
+
+  pantalla13.setMapTile(1, 0, 1)
+  pantalla13.setMapTile(1, 1, 1)
+  pantalla13.setMapTile(1, 2, 1)
+  pantalla13.setMapTile(1, 3, 1)
+  pantalla13.setMapTile(1, 4, 1)
+  pantalla13.setMapTile(1, 5, 1)
+  pantalla13.setMapTile(1, 6, 1)
+  pantalla13.setMapTile(1, 7, 1)
+  pantalla13.setMapTile(1, 8, 1)
+  pantalla13.setMapTile(1, 9, 1)
+
+  pantalla13.setMapTile(2, 0, 1)
+  pantalla13.setMapTile(2, 2, 1)
+  pantalla13.setMapTile(2, 3, 1)
+  pantalla13.setMapTile(2, 4, 1)
+  pantalla13.setMapTile(2, 5, 1)
+  pantalla13.setMapTile(2, 6, 1)
+  pantalla13.setMapTile(2, 8, 1)
+  pantalla13.setMapTile(2, 9, 1)
+
+  pantalla13.setMapTile(3, 0, 1)
+  pantalla13.setMapTile(3, 1, 1)
+  pantalla13.setMapTile(3, 2, 1)
+  pantalla13.setMapTile(3, 3, 1)
+  pantalla13.setMapTile(3, 5, 1)
+  pantalla13.setMapTile(3, 6, 1)
+  pantalla13.setMapTile(3, 7, 1)
+  pantalla13.setMapTile(3, 8, 1)
+  pantalla13.setMapTile(3, 9, 1)
+
+  pantalla13.setMapTile(4, 0, 1)
+  pantalla13.setMapTile(4, 1, 1)
+  pantalla13.setMapTile(4, 2, 1)
+  pantalla13.setMapTile(4, 3, 1)
+  pantalla13.setMapTile(4, 4, 1)
+  pantalla13.setMapTile(4, 5, 1)
+  pantalla13.setMapTile(4, 6, 1)
+  pantalla13.setMapTile(4, 7, 1)
+  pantalla13.setMapTile(4, 8, 1)
+  pantalla13.setMapTile(4, 9, 1)
+
+  pantalla13.setMapTile(5, 0, 1)
+  pantalla13.setMapTile(5, 1, 1)
+  pantalla13.setMapTile(5, 3, 1)
+  pantalla13.setMapTile(5, 4, 1)
+  pantalla13.setMapTile(5, 5, 1)
+  pantalla13.setMapTile(5, 7, 1)
+  pantalla13.setMapTile(5, 8, 1)
+  pantalla13.setMapTile(5, 9, 1)
+
+
+
+  pantalla14.setMapTile(0, 8, 1)
+  pantalla14.setMapTile(0, 9, 1)
+  pantalla14.setMapTile(1, 8, 1)
+  pantalla14.setMapTile(1, 9, 1)
+
+
+
+  pantalla15.setMapTile(4, 0, 1)
+  pantalla15.setMapTile(5, 0, 1)
+  pantalla15.setMapTile(4, 1, 1)
+  pantalla15.setMapTile(5, 1, 1)
 }
